@@ -1,0 +1,32 @@
+@page "/player"
+@inject IJSRuntime jsRuntime
+
+<h3>Player</h3>
+
+<div class="row align-items-center">
+    <div class="col-8">
+        <video id="my-player" controls class="video-js">
+        </video>
+    </div>
+</div>
+
+@code {
+protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await jsRuntime.InvokeVoidAsync("loadPlayer", "my-player", new
+            {
+                controls = true,
+                autoplay = false,
+                preload = "auto",
+                width = 560,
+                height = 264,
+                techOrder = new[] { "youtube" },
+                sources = new[] {
+                        new { type =  "video/youtube", src = "https://www.youtube.com/watch?v=xjS6SftYQaQ"}
+                }
+            });
+        }
+    }
+}
