@@ -1,1 +1,1 @@
-# BlazorVideosJs
+# BlazorVideoJs
